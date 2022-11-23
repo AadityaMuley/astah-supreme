@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Title: Assingment 3
@@ -12,7 +13,10 @@ import javax.swing.*;
 public class PanelSourceCode extends JPanel {
     
     PanelSourceCode() {
-        JButton button = new JButton("Source code goes here");
-        add(button);
+        JPanel codePanel = new JPanel();
+        JScrollPane scrollPane = new JScrollPane(codePanel);
+
+        this.setLayout(new GridLayout());
+        this.add(scrollPane);
     }
 }

@@ -22,21 +22,29 @@ public class Main extends JFrame {
         
         setTitle("Astah Replica - CSE 564 Final Project");
         setLayout(new GridLayout(3, 1));
-        setSize(500,500);
-        
+        setSize(1000,700);
+
+        this.setLayout(new BorderLayout());
+
+        //MENU
         panelMenubar = new PanelMenubar();
-        add(panelMenubar);
-        
+        panelMenubar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        add(panelMenubar, BorderLayout.NORTH);
+
+        //SOURCE CODE & UML
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 2));
         panelSourceCode = new PanelSourceCode();
         panelDrawUml = new PanelDrawUml();
         panel.add(panelSourceCode);
         panel.add(panelDrawUml);
-        add(panel);
-        
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        add(panel, BorderLayout.CENTER);
+
+        //STATUS
         panelStatusBar = new PanelStatusBar();
-        add(panelStatusBar);
+        panelStatusBar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        add(panelStatusBar, BorderLayout.SOUTH);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
