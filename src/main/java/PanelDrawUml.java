@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +17,46 @@ public class PanelDrawUml extends JPanel {
     private ArrayList<BoxAttributes> boxes = new ArrayList<BoxAttributes>();
     private final int width = 100;
     private final int height = 50;
-
+    
+    
+    //dialog box for name of class
+    private void dialogBox(MouseEvent me) {
+        JDialog dialog = new JDialog();
+        dialog.setLayout(new BorderLayout());
+        dialog.setPreferredSize(new Dimension(200, 100));
+        
+        JTextArea textArea = new JTextArea();
+        
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        
+        JScrollPane pane = new JScrollPane(textArea);
+        pane.setPreferredSize(new Dimension(200, 100));
+        pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+        JButton button = new JButton("OK");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String content = textArea.getText();
+                boxes.add(new BoxAttributes(content, new Rectangle(me.getX(), me.getY(), width, height)));
+                
+                dialog.dispose();
+                
+                repaint();
+            }
+        });
+        
+        dialog.add(pane, BorderLayout.CENTER);
+        dialog.add(button, BorderLayout.SOUTH);
+        
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setLocationRelativeTo(null);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+    
+    
     PanelDrawUml() {
 
         this.setBackground(Color.WHITE);
@@ -30,18 +67,7 @@ public class PanelDrawUml extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
-                Dialog dialog = new Dialog();
-                dialog.setTitle("Type Name Here: ");
-                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                dialog.setLocationRelativeTo(null);
-                dialog.pack();
-                dialog.setVisible(true);
-
-                String name = dialog.getName();
-                boxes.add(new BoxAttributes(name, new Rectangle(e.getX(), e.getY(), width, height)));
-
-                repaint();
+                dialogBox(e);
             }
         });
     }
