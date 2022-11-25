@@ -18,6 +18,74 @@ public class PanelDrawUml extends JPanel {
     private final int width = 100;
     private final int height = 50;
     private int relationship; // 1-Association, 2-Aggregation, 3-Inheritance
+    private int secondRectangle = 0;
+    
+    
+    PanelDrawUml() {
+
+        this.setBackground(Color.WHITE);
+        this.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+        
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                
+                // draw rectangle box with class name on Left click
+                if(SwingUtilities.isLeftMouseButton(e)) {
+                    // check if mouse clicked inside an existing box
+                    boolean drawNewRect = true;
+                    for(BoxAttributes i : boxes) {
+                        if((e.getX() >= i.rectangle.x) &&
+                                (e.getX() <= i.rectangle.x + i.rectangle.width) &&
+                                (e.getY() >= i.rectangle.y) &&
+                                (e.getY() <= i.rectangle.y + i.rectangle.height)) {
+                            
+                            if(secondRectangle == 0) {
+                                drawNewRect = false;
+                                System.out.println("Hit inside 1st rectangle");
+                                secondRectangle = 1;
+                                break;
+                            }
+                            if(secondRectangle == 1) {
+                                drawNewRect = false;
+                                System.out.println("Hit inside 2nd rectangle");
+                                secondRectangle = 0;
+                            }
+                        }
+                    }
+    
+                    // draw new rectangle
+                    if(drawNewRect == true) {
+                        super.mouseClicked(e);
+                        dialogBox(e);
+                    }
+                }
+                
+                // pop up dialog to select relation arrow head between association, aggregation, inheritance
+                if(SwingUtilities.isRightMouseButton(e)) {
+                    RelationSelector relationSelector = new RelationSelector();
+                    relationship = relationSelector.getRelation();
+                }
+            }
+        });
+    }
+
+
+    // draw boxes
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+        for(BoxAttributes box: boxes) {
+            g2d.setColor(Color.LIGHT_GRAY);
+            g2d.fill(box.rectangle);
+            g2d.draw(box.rectangle);
+
+            g2d.setColor(Color.BLACK);
+            g2d.drawString(box.name, (int)box.rectangle.getX(), (int)box.rectangle.getY()+15);
+        }
+    }
     
     
     //dialog box for name of class
@@ -55,62 +123,5 @@ public class PanelDrawUml extends JPanel {
         dialog.setLocationRelativeTo(null);
         dialog.pack();
         dialog.setVisible(true);
-    }
-    
-    
-    PanelDrawUml() {
-
-        this.setBackground(Color.WHITE);
-        this.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-        
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                
-                // draw rectangle box with class name on Left click
-                if(SwingUtilities.isLeftMouseButton(e)) {
-                    // check if mouse clicked inside an existing box
-                    boolean drawNewRect = true;
-                    for(BoxAttributes i : boxes) {
-                        if((e.getX() >= i.rectangle.x) &&
-                                (e.getX() <= i.rectangle.x + i.rectangle.width) &&
-                                (e.getY() >= i.rectangle.y) &&
-                                (e.getY() <= i.rectangle.y + i.rectangle.height)) {
-                            System.out.println("Hit inside rectangle");
-                            drawNewRect = false;
-                        }
-                    }
-    
-                    // draw new rectangle
-                    if(drawNewRect == true) {
-                        super.mouseClicked(e);
-                        dialogBox(e);
-                    }
-                }
-                
-                // pop up dialog to select relation arrow head between association, aggregation, inheritance
-                if(SwingUtilities.isRightMouseButton(e)) {
-                    RelationSelector relationSelector = new RelationSelector();
-                    relationship = relationSelector.getRelation();
-                }
-            }
-        });
-    }
-
-
-    // draw boxes
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-
-        for(BoxAttributes box: boxes) {
-            g2d.setColor(Color.LIGHT_GRAY);
-            g2d.fill(box.rectangle);
-            g2d.draw(box.rectangle);
-
-            g2d.setColor(Color.BLACK);
-            g2d.drawString(box.name, (int)box.rectangle.getX(), (int)box.rectangle.getY()+15);
-        }
     }
 }
