@@ -4,8 +4,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
- * Title: Assingment 3
- * Description:  CSE 564 : Singleton, Decorator, Observer Pattern
+ * Title: Assingment 4
+ * Description:  CSE 564 : Final project
  *
  * @author Aaditya Muley
  * ASUrite : amuley2
@@ -17,6 +17,7 @@ public class PanelDrawUml extends JPanel {
     private ArrayList<BoxAttributes> boxes = new ArrayList<BoxAttributes>();
     private final int width = 100;
     private final int height = 50;
+    private int relationship; // 1-Association, 2-Aggregation, 3-Inheritance
     
     
     //dialog box for name of class
@@ -67,20 +68,31 @@ public class PanelDrawUml extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 
-                boolean drawNewRect = true;
-                for(BoxAttributes i : boxes) {
-                    if((e.getX() >= i.rectangle.x) &&
-                            (e.getX() <= i.rectangle.x+i.rectangle.width) &&
-                            (e.getY() >= i.rectangle.y) &&
-                            (e.getY() <= i.rectangle.y+i.rectangle.height)) {
-                        System.out.println("Hit inside rectangle");
-                        drawNewRect = false;
+                // draw rectangle box with class name on Left click
+                if(SwingUtilities.isLeftMouseButton(e)) {
+                    // check if mouse clicked inside an existing box
+                    boolean drawNewRect = true;
+                    for(BoxAttributes i : boxes) {
+                        if((e.getX() >= i.rectangle.x) &&
+                                (e.getX() <= i.rectangle.x + i.rectangle.width) &&
+                                (e.getY() >= i.rectangle.y) &&
+                                (e.getY() <= i.rectangle.y + i.rectangle.height)) {
+                            System.out.println("Hit inside rectangle");
+                            drawNewRect = false;
+                        }
+                    }
+    
+                    // draw new rectangle
+                    if(drawNewRect == true) {
+                        super.mouseClicked(e);
+                        dialogBox(e);
                     }
                 }
                 
-                if(drawNewRect == true) {
-                    super.mouseClicked(e);
-                    dialogBox(e);
+                // pop up dialog to select relation arrow head between association, aggregation, inheritance
+                if(SwingUtilities.isRightMouseButton(e)) {
+                    RelationSelector relationSelector = new RelationSelector();
+                    relationship = relationSelector.getRelation();
                 }
             }
         });

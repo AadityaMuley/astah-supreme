@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Title: Assingment 3
- * Description:  CSE 564 : Singleton, Decorator, Observer Pattern
+ * Title: Assingment 4
+ * Description:  CSE 564 : Final project
  *
  * @author Aaditya Muley
  * ASUrite : amuley2
