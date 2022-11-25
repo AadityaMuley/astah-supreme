@@ -61,13 +61,27 @@ public class PanelDrawUml extends JPanel {
 
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-
-        // mouse event in the UML panel
+        
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dialogBox(e);
+                
+                boolean drawNewRect = true;
+                for(BoxAttributes i : boxes) {
+                    if((e.getX() >= i.rectangle.x) &&
+                            (e.getX() <= i.rectangle.x+i.rectangle.width) &&
+                            (e.getY() >= i.rectangle.y) &&
+                            (e.getY() <= i.rectangle.y+i.rectangle.height)) {
+                        System.out.println("Hit inside rectangle");
+                        drawNewRect = false;
+                    }
+                }
+                
+                if(drawNewRect == true) {
+                    super.mouseClicked(e);
+                    dialogBox(e);
+                }
             }
         });
     }
