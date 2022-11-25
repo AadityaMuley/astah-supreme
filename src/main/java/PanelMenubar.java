@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 /**
- * Title: Assingment 4
+ * Title: Assignment 4
  * Description:  CSE 564 : Final project
  *
  * @author Aaditya Muley

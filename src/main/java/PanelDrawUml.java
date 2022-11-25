@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 /**
- * Title: Assingment 4
+ * Title: Assignment 4
  * Description:  CSE 564 : Final project
  *
  * @author Aaditya Muley
@@ -17,8 +18,10 @@ public class PanelDrawUml extends JPanel {
     private ArrayList<BoxAttributes> boxes = new ArrayList<BoxAttributes>();
     private final int width = 100;
     private final int height = 50;
+    RelationSelector relationSelector = new RelationSelector();
     private int relationship; // 1-Association, 2-Aggregation, 3-Inheritance
-    private int secondRectangle = 0;
+    private int secondRectangle = 0; // checks if 2nd click is also inside an existing rectangle
+    private double X1, Y1, X2, Y2; // temporary coordinates for line between 2 rectangles
     
     
     PanelDrawUml() {
@@ -33,24 +36,34 @@ public class PanelDrawUml extends JPanel {
                 
                 // draw rectangle box with class name on Left click
                 if(SwingUtilities.isLeftMouseButton(e)) {
-                    // check if mouse clicked inside an existing box
                     boolean drawNewRect = true;
+    
+                    // check if mouse clicked inside an existing box twice to create a relationship line
                     for(BoxAttributes i : boxes) {
-                        if((e.getX() >= i.rectangle.x) &&
-                                (e.getX() <= i.rectangle.x + i.rectangle.width) &&
-                                (e.getY() >= i.rectangle.y) &&
-                                (e.getY() <= i.rectangle.y + i.rectangle.height)) {
-                            
-                            if(secondRectangle == 0) {
-                                drawNewRect = false;
-                                System.out.println("Hit inside 1st rectangle");
-                                secondRectangle = 1;
-                                break;
-                            }
-                            if(secondRectangle == 1) {
-                                drawNewRect = false;
-                                System.out.println("Hit inside 2nd rectangle");
-                                secondRectangle = 0;
+                        if(i.isBox == 1) {
+                            if((e.getX() >= i.rectangle.x) &&
+                                    (e.getX() <= i.rectangle.x + i.rectangle.width) &&
+                                    (e.getY() >= i.rectangle.y) &&
+                                    (e.getY() <= i.rectangle.y + i.rectangle.height)) {
+        
+                                if(secondRectangle == 0) {
+                                    drawNewRect = false;
+                                    secondRectangle = 1;
+                                    
+                                    X1 = i.rectangle.x + (i.rectangle.width/2);
+                                    Y1 = i.rectangle.y + (i.rectangle.height/2);
+                                    
+                                    break;
+                                }
+                                if(secondRectangle == 1) {
+                                    drawNewRect = false;
+                                    secondRectangle = 0;
+                                    
+                                    relationship = relationSelector.getRelation();
+                                    X2 = i.rectangle.x + (i.rectangle.width/2);
+                                    Y2 = i.rectangle.y + (i.rectangle.height/2);
+                                    boxes.add(new BoxAttributes(0, relationship, new Line2D.Double(X1, Y1, X2, Y2)));
+                                }
                             }
                         }
                     }
@@ -64,8 +77,7 @@ public class PanelDrawUml extends JPanel {
                 
                 // pop up dialog to select relation arrow head between association, aggregation, inheritance
                 if(SwingUtilities.isRightMouseButton(e)) {
-                    RelationSelector relationSelector = new RelationSelector();
-                    relationship = relationSelector.getRelation();
+                    relationSelector.setRelation();
                 }
             }
         });
@@ -78,13 +90,41 @@ public class PanelDrawUml extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         for(BoxAttributes box: boxes) {
-            g2d.setColor(Color.LIGHT_GRAY);
-            g2d.fill(box.rectangle);
-            g2d.draw(box.rectangle);
-
-            g2d.setColor(Color.BLACK);
-            g2d.drawString(box.name, (int)box.rectangle.getX(), (int)box.rectangle.getY()+15);
+            
+            // if isBox = 1 then it's a rectangle so drawing that
+            if(box.isBox == 1) {
+                g2d.setColor(Color.LIGHT_GRAY);
+                g2d.fill(box.rectangle);
+                g2d.draw(box.rectangle);
+    
+                g2d.setColor(Color.BLACK);
+                g2d.drawString(box.name, (int) box.rectangle.getX(), (int) box.rectangle.getY() + 15);
+            }
+            
+            // if isBox = 0 then it's a relationship line so drawing that
+            if(box.isBox == 0) {
+                // relationship = 1 is Association
+                if(box.relationship == 1) {
+                    g2d.setColor(Color.RED);
+                    g2d.fill(box.line);
+                    g2d.draw(box.line);
+                }
+                // relationship = 2 is Aggregation
+                else if(box.relationship == 2) {
+                    g2d.setColor(Color.GREEN);
+                    g2d.fill(box.line);
+                    g2d.draw(box.line);
+                }
+                // relationship = 3 is Inheritance
+                else {
+                    g2d.setColor(Color.BLUE);
+                    g2d.fill(box.line);
+                    g2d.draw(box.line);
+                }
+            }
         }
+        
+        repaint();
     }
     
     
@@ -108,7 +148,7 @@ public class PanelDrawUml extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String content = textArea.getText();
-                boxes.add(new BoxAttributes(content, new Rectangle(me.getX(), me.getY(), width, height)));
+                boxes.add(new BoxAttributes(1, content, new Rectangle(me.getX(), me.getY(), width, height)));
                 
                 dialog.dispose();
                 

@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Title: Assingment 4
+ * Title: Assignment 4
  * Description:  CSE 564 : Final project
  *
  * @author Aaditya Muley

@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Title: Assingment 4
+ * Title: Assignment 4
  * Description:  CSE 564 : Final project
  *
  * @author Aaditya Muley
@@ -14,9 +14,13 @@ import java.awt.event.ActionListener;
  */
 public class RelationSelector {
     
-    static int relation = 1;
+    static int relation = 1; // 1-Association, 2-Aggregation, 3-Inheritance
     
     public int getRelation() {
+        return relation;
+    }
+    
+    public void setRelation() {
         JDialog dialog = new JDialog();
         dialog.setLayout(new GridLayout(3,1));
         dialog.setPreferredSize(new Dimension(200, 100));
@@ -56,7 +60,5 @@ public class RelationSelector {
         dialog.setLocationRelativeTo(null);
         dialog.pack();
         dialog.setVisible(true);
-        
-        return relation;
     }
 }
