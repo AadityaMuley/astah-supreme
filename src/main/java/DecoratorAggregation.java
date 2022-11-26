@@ -16,5 +16,9 @@ public class DecoratorAggregation extends Decorator{
         super.draw(g2d, box);
         
         // logic for aggregation arrow head
+    
+        g2d.setColor(Color.BLUE);
+        g2d.fill(box.line);
+        g2d.draw(box.line);
     }
 }

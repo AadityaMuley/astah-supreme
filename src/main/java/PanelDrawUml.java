@@ -25,9 +25,6 @@ public class PanelDrawUml extends JPanel {
     private int secondRectangle = 0; // checks if 2nd click is also inside an existing rectangle
     private double X1, Y1, X2, Y2; // temporary coordinates for line between 2 rectangles
     
-    DrawBox drawBox = new DrawBox();
-    DrawRelationLine drawRelationLine = new DrawRelationLine();
-    
     
     PanelDrawUml() {
 
@@ -98,12 +95,42 @@ public class PanelDrawUml extends JPanel {
             
             // if isBox = 1 then it's a rectangle so drawing that
             if(box.isBox == 1) {
+                DrawBox drawBox = new DrawBox();
                 drawBox.draw(g2d, box);
             }
             
             // if isBox = 0 then it's a relationship line so drawing that
             if(box.isBox == 0) {
-                drawRelationLine.draw(g2d, box);
+                DrawRelationLine drawRelationLine = new DrawRelationLine();
+                // relationship = 1 is Association
+                if(box.relationship == 1) {
+                    drawRelationLine.draw(g2d, box);
+        
+                    // decorator for association arrow head
+                    DecoratorAssociation association = new DecoratorAssociation();
+                    association.setDrawable(drawRelationLine);
+                    association.draw(g2d, box);
+                }
+    
+                // relationship = 2 is Aggregation
+                else if(box.relationship == 2) {
+                    drawRelationLine.draw(g2d, box);
+        
+                    // decorator for aggregation arrow head
+                    DecoratorAggregation aggregation = new DecoratorAggregation();
+                    aggregation.setDrawable(drawRelationLine);
+                    aggregation.draw(g2d, box);
+                }
+    
+                // relationship = 3 is Inheritance
+                else {
+                    drawRelationLine.draw(g2d, box);
+        
+                    // decorator for inheritance arrow head
+                    DecoratorInheritance inheritance = new DecoratorInheritance();
+                    inheritance.setDrawable(drawRelationLine);
+                    inheritance.draw(g2d, box);
+                }
             }
         }
         

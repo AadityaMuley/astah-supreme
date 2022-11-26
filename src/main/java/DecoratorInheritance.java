@@ -16,5 +16,9 @@ public class DecoratorInheritance extends Decorator{
         super.draw(g2d, box);
         
         // logic for inheritance arrow head
+    
+        g2d.setColor(Color.GREEN);
+        g2d.fill(box.line);
+        g2d.draw(box.line);
     }
 }

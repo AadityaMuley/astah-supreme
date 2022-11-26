@@ -16,5 +16,9 @@ public class DecoratorAssociation extends Decorator{
         super.draw(g2d, box);
         
         // logic for association arrow head
+    
+        g2d.setColor(Color.RED);
+        g2d.fill(box.line);
+        g2d.draw(box.line);
     }
 }
