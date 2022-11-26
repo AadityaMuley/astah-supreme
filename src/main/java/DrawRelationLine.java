@@ -13,8 +13,21 @@ public class DrawRelationLine extends Drawable{
     
     @Override
     public void draw(Graphics2D g2d, BoxAttributes box) {
-        g2d.setColor(Color.BLACK);
-        g2d.fill(box.line);
-        g2d.draw(box.line);
+        
+        if(box.relationship == 1) {
+            g2d.setColor(Color.RED);
+            g2d.fill(box.line);
+            g2d.draw(box.line);
+        }
+        else if(box.relationship == 2) {
+            g2d.setColor(Color.BLUE);
+            g2d.fill(box.line);
+            g2d.draw(box.line);
+        }
+        else {
+            g2d.setColor(Color.GREEN);
+            g2d.fill(box.line);
+            g2d.draw(box.line);
+        }
     }
 }
