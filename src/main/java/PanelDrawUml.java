@@ -16,12 +16,17 @@ import java.util.ArrayList;
 public class PanelDrawUml extends JPanel {
 
     private ArrayList<BoxAttributes> boxes = new ArrayList<BoxAttributes>();
+    
     private final int width = 100;
     private final int height = 50;
+    
     RelationSelector relationSelector = new RelationSelector();
     private int relationship; // 1-Association, 2-Aggregation, 3-Inheritance
     private int secondRectangle = 0; // checks if 2nd click is also inside an existing rectangle
     private double X1, Y1, X2, Y2; // temporary coordinates for line between 2 rectangles
+    
+    DrawBox drawBox = new DrawBox();
+    DrawRelationLine drawRelationLine = new DrawRelationLine();
     
     
     PanelDrawUml() {
@@ -93,34 +98,12 @@ public class PanelDrawUml extends JPanel {
             
             // if isBox = 1 then it's a rectangle so drawing that
             if(box.isBox == 1) {
-                g2d.setColor(Color.LIGHT_GRAY);
-                g2d.fill(box.rectangle);
-                g2d.draw(box.rectangle);
-    
-                g2d.setColor(Color.BLACK);
-                g2d.drawString(box.name, (int) box.rectangle.getX(), (int) box.rectangle.getY() + 15);
+                drawBox.draw(g2d, box);
             }
             
             // if isBox = 0 then it's a relationship line so drawing that
             if(box.isBox == 0) {
-                // relationship = 1 is Association
-                if(box.relationship == 1) {
-                    g2d.setColor(Color.RED);
-                    g2d.fill(box.line);
-                    g2d.draw(box.line);
-                }
-                // relationship = 2 is Aggregation
-                else if(box.relationship == 2) {
-                    g2d.setColor(Color.GREEN);
-                    g2d.fill(box.line);
-                    g2d.draw(box.line);
-                }
-                // relationship = 3 is Inheritance
-                else {
-                    g2d.setColor(Color.BLUE);
-                    g2d.fill(box.line);
-                    g2d.draw(box.line);
-                }
+                drawRelationLine.draw(g2d, box);
             }
         }
         
