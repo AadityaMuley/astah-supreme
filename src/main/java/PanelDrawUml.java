@@ -37,7 +37,6 @@ public class PanelDrawUml extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println("mouse clicked");
                 
                 // draw rectangle box with class name on Left click
                 if(SwingUtilities.isLeftMouseButton(e)) {
