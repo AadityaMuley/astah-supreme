@@ -1,4 +1,4 @@
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * Title: Assignment 4
@@ -9,10 +9,7 @@ import javax.swing.*;
  * ASU ID : 1225526185
  * @version 1.0
  */
-public class PanelMenubar extends JPanel {
+public abstract class Drawable {
     
-    PanelMenubar() {
-        JButton button = new JButton("Menu bar");
-        add(button);
-    }
+    public abstract void draw(Graphics2D g2d, BoxAttributes box);
 }

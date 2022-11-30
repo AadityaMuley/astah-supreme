@@ -3,8 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Title: Assingment 3
- * Description:  CSE 564 : Singleton, Decorator, Observer Pattern
+ * Title: Assignment 4
+ * Description:  CSE 564 : Final project
  *
  * @author Aaditya Muley
  * ASUrite : amuley2
