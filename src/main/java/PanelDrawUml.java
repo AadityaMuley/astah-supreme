@@ -24,11 +24,9 @@ public class PanelDrawUml extends JPanel {
     private int relationship; // 1-Association, 2-Aggregation, 3-Inheritance
     private int secondRectangle = 0; // checks if 2nd click is also inside an existing rectangle
     private double X1, Y1, X2, Y2; // temporary coordinates for line between 2 rectangles
-    
     private String movedBoxName; // temporary string to record moved box's name
     private String startBoxName;
     private String endBoxName;
-
     
     PanelDrawUml() {
 
@@ -56,7 +54,6 @@ public class PanelDrawUml extends JPanel {
                                     drawNewRect = false;
                                     secondRectangle = 1;
                                     startBoxName = i.name;
-
                                     
                                     X1 = i.rectangle.x + (i.rectangle.width/2);
                                     Y1 = i.rectangle.y + (i.rectangle.height/2);
@@ -158,6 +155,7 @@ public class PanelDrawUml extends JPanel {
 
                 repaint();
             }
+
         });
     }
 
