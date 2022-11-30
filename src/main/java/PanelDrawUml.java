@@ -25,6 +25,10 @@ public class PanelDrawUml extends JPanel {
     private int secondRectangle = 0; // checks if 2nd click is also inside an existing rectangle
     private double X1, Y1, X2, Y2; // temporary coordinates for line between 2 rectangles
     
+    private String movedBoxName; // temporary string to record moved box's name
+    private String startBoxName;
+    private String endBoxName;
+
     
     PanelDrawUml() {
 
@@ -35,6 +39,7 @@ public class PanelDrawUml extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                System.out.println("mouse clicked");
                 
                 // draw rectangle box with class name on Left click
                 if(SwingUtilities.isLeftMouseButton(e)) {
@@ -51,6 +56,8 @@ public class PanelDrawUml extends JPanel {
                                 if(secondRectangle == 0) {
                                     drawNewRect = false;
                                     secondRectangle = 1;
+                                    startBoxName = i.name;
+
                                     
                                     X1 = i.rectangle.x + (i.rectangle.width/2);
                                     Y1 = i.rectangle.y + (i.rectangle.height/2);
@@ -60,11 +67,17 @@ public class PanelDrawUml extends JPanel {
                                 if(secondRectangle == 1) {
                                     drawNewRect = false;
                                     secondRectangle = 0;
+                                    endBoxName = i.name;
                                     
                                     relationship = relationSelector.getRelation();
                                     X2 = i.rectangle.x + (i.rectangle.width/2);
                                     Y2 = i.rectangle.y + (i.rectangle.height/2);
-                                    boxes.add(new BoxAttributes(0, relationship, new Line2D.Double(X1, Y1, X2, Y2)));
+
+                                    boxes.add(new BoxAttributes(0,
+                                                                relationship,
+                                                                startBoxName,
+                                                                endBoxName,
+                                                                new Line2D.Double(X1, Y1, X2, Y2)));
                                 }
                             }
                         }
@@ -81,6 +94,70 @@ public class PanelDrawUml extends JPanel {
                 if(SwingUtilities.isRightMouseButton(e)) {
                     relationSelector.setRelation();
                 }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+
+                // reset moved box's name
+                movedBoxName = "";
+
+                for(BoxAttributes i: boxes) {
+                    if(i.isBox == 1) {
+                        if((e.getX() >= i.rectangle.x) &&
+                                (e.getX() <= i.rectangle.x + i.rectangle.width) &&
+                                (e.getY() >= i.rectangle.y) &&
+                                (e.getY() <= i.rectangle.y + i.rectangle.height)) {
+
+                            movedBoxName = i.name;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+
+                boolean movable = true;
+
+                for(BoxAttributes i: boxes) {
+                    if(i.isBox == 1) {
+                        if((e.getX() >= i.rectangle.x) &&
+                                (e.getX() <= i.rectangle.x + i.rectangle.width) &&
+                                (e.getY() >= i.rectangle.y) &&
+                                (e.getY() <= i.rectangle.y + i.rectangle.height)) {
+
+                            movable = false;
+                            break;
+                        }
+                    }
+                }
+
+                if(movable == true) {
+                    for(BoxAttributes i: boxes) {
+                        if(i.isBox == 1 && i.name == movedBoxName) {
+                            i.rectangle.x = e.getX();
+                            i.rectangle.y = e.getY();
+                        }
+
+                        if(i.isBox == 0 && movedBoxName == i.start) {
+                            double newX1 = e.getX() + (width/2);
+                            double newY1 = e.getY() + (height/2);
+                            i.line = new Line2D.Double(newX1, newY1, i.line.getX2(), i.line.getY2());
+                        }
+
+                        if(i.isBox == 0 && movedBoxName == i.end) {
+                            double newX1 = e.getX() + (width/2);
+                            double newY1 = e.getY() + (height/2);
+                            i.line = new Line2D.Double(i.line.getX1(), i.line.getY1(), newX1, newY1);
+                        }
+                    }
+                }
+
+                repaint();
             }
         });
     }

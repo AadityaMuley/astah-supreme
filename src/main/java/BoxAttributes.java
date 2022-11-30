@@ -7,6 +7,8 @@ public class BoxAttributes {
     public String name;
     public Rectangle rectangle;
     public int relationship;
+    public String start;
+    public String end;
     public Line2D line;
 
     public BoxAttributes(int isBox, String name, Rectangle rectangle) {
@@ -15,9 +17,11 @@ public class BoxAttributes {
         this.rectangle = rectangle;
     }
     
-    public BoxAttributes(int isBox, int relationship, Line2D line) {
+    public BoxAttributes(int isBox, int relationship, String start, String end, Line2D line) {
         this.isBox = isBox;
         this.relationship = relationship;
+        this.start = start;
+        this.end = end;
         this.line = line;
     }
 }
