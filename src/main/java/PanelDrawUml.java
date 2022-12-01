@@ -43,31 +43,33 @@ public class PanelDrawUml extends JPanel {
                     boolean drawNewRect = true;
     
                     // check if mouse clicked inside an existing box twice to create a relationship line
-                    for(BoxAttributes i : boxes) {
-                        if(i.isBox == 1) {
-                            if((e.getX() >= i.rectangle.x) &&
-                                    (e.getX() <= i.rectangle.x + i.rectangle.width) &&
-                                    (e.getY() >= i.rectangle.y) &&
-                                    (e.getY() <= i.rectangle.y + i.rectangle.height)) {
+                    for(int i=0; i<boxes.size(); i++) {
+                        if(boxes.get(i).isBox == 1) {
+                            if((e.getX() >= boxes.get(i).rectangle.x) &&
+                                    (e.getX() <= boxes.get(i).rectangle.x + boxes.get(i).rectangle.width) &&
+                                    (e.getY() >= boxes.get(i).rectangle.y) &&
+                                    (e.getY() <= boxes.get(i).rectangle.y + boxes.get(i).rectangle.height)) {
         
                                 if(secondRectangle == 0) {
                                     drawNewRect = false;
                                     secondRectangle = 1;
-                                    startBoxName = i.name;
+                                    startBoxName = boxes.get(i).name;
                                     
-                                    X1 = i.rectangle.x + (i.rectangle.width/2);
-                                    Y1 = i.rectangle.y + (i.rectangle.height/2);
+                                    X1 = boxes.get(i).rectangle.x + (boxes.get(i).rectangle.width/2);
+                                    Y1 = boxes.get(i).rectangle.y + (boxes.get(i).rectangle.height/2);
                                     
                                     break;
                                 }
                                 if(secondRectangle == 1) {
                                     drawNewRect = false;
                                     secondRectangle = 0;
-                                    endBoxName = i.name;
+                                    endBoxName = boxes.get(i).name;
                                     
                                     relationship = relationSelector.getRelation();
-                                    X2 = i.rectangle.x + (i.rectangle.width/2);
-                                    Y2 = i.rectangle.y + (i.rectangle.height/2);
+                                    X2 = boxes.get(i).rectangle.x + (boxes.get(i).rectangle.width/2);
+                                    Y2 = boxes.get(i).rectangle.y + (boxes.get(i).rectangle.height/2);
+                                    
+                                    if(X1==X2 && Y1==Y2) continue;
 
                                     boxes.add(new BoxAttributes(0,
                                                                 relationship,
