@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Title: Assignment 4
@@ -9,10 +12,48 @@ import javax.swing.*;
  * ASU ID : 1225526185
  * @version 1.0
  */
-public class PanelStatusBar extends JPanel {
+public class PanelStatusBar extends JPanel implements Observer {
+    
+    JLabel label;
+    private static String[] status = new String[2];
+    private String l;
     
     PanelStatusBar() {
-        JButton button = new JButton("Status bar");
-        add(button);
+        JLabel label = new JLabel("Application started - Welcome!!!");
+        add(label);
+    }
+    
+    private void drawLabel(String l) {
+        System.out.println(l);
+        removeAll();
+        
+        label = new JLabel(l);
+        add(label);
+        
+        repaint();
+    }
+    
+    @Override
+    public void update(Observable o, Object arg) {
+        status = ((BoxAttributes)o).getStatus();
+        
+        if(status[0].equalsIgnoreCase("1")) {
+            l = "New class named - " + status[1] + " - created";
+            drawLabel(l);
+        }
+        else {
+            if(status[1].equalsIgnoreCase("1")) {
+                l = "New Association relation created";
+                drawLabel(l);
+            }
+            else if(status[1].equalsIgnoreCase("2")) {
+                l = "New Aggregation relation created";
+                drawLabel(l);
+            }
+            else {
+                l = "New Inheritance relation created";
+                drawLabel(l);
+            }
+        }
     }
 }

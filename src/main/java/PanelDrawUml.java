@@ -14,6 +14,8 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class PanelDrawUml extends JPanel {
+    
+    PanelStatusBar statusBar = new PanelStatusBar();
 
     private ArrayList<BoxAttributes> boxes = new ArrayList<BoxAttributes>();
     
@@ -70,12 +72,16 @@ public class PanelDrawUml extends JPanel {
                                     Y2 = boxes.get(i).rectangle.y + (boxes.get(i).rectangle.height/2);
                                     
                                     if(X1==X2 && Y1==Y2) continue;
+                                    
+                                    BoxAttributes boxAttributes = new BoxAttributes();
+                                    boxAttributes.addObserver(statusBar);
+                                    boxAttributes.setLineAttributes(0,
+                                            relationship,
+                                            startBoxName,
+                                            endBoxName,
+                                            new Line2D.Double(X1, Y1, X2, Y2));
 
-                                    boxes.add(new BoxAttributes(0,
-                                                                relationship,
-                                                                startBoxName,
-                                                                endBoxName,
-                                                                new Line2D.Double(X1, Y1, X2, Y2)));
+                                    boxes.add(boxAttributes);
                                 }
                             }
                         }
@@ -234,7 +240,14 @@ public class PanelDrawUml extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String content = textArea.getText();
-                boxes.add(new BoxAttributes(1, content, new Rectangle(me.getX(), me.getY(), width, height)));
+                
+                BoxAttributes boxAttributes = new BoxAttributes();
+                boxAttributes.addObserver(statusBar);
+                boxAttributes.setBoxAttributes(1,
+                        content,
+                        new Rectangle(me.getX(), me.getY(), width, height));
+                
+                boxes.add(boxAttributes);
                 
                 dialog.dispose();
                 
