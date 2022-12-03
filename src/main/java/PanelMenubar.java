@@ -27,13 +27,34 @@ public class PanelMenubar extends JPanel {
     PanelDrawUml drawUml = new PanelDrawUml();
     JButton loadButton;
     JButton saveButton;
+    JButton newButton;
+    JButton helpButton;
     private ArrayList<BoxAttributes> boxes = new ArrayList<>();
 
 
     PanelMenubar() {
 
+        newButton = new JButton("New");
         loadButton = new JButton("Load");
         saveButton = new JButton("Save");
+        helpButton = new JButton("Help");
+
+
+        ActionListener helpListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new help();
+            }
+        };
+
+
+        ActionListener newListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boxes.clear();
+                drawUml.setBoxes(boxes);
+            }
+        };
 
 
         ActionListener saveListener = new ActionListener() {
@@ -77,10 +98,14 @@ public class PanelMenubar extends JPanel {
             }
         };
 
+        newButton.addActionListener(newListener);
         loadButton.addActionListener(loadListener);
         saveButton.addActionListener(saveListener);
+        helpButton.addActionListener(helpListener);
+        add(newButton);
         add(loadButton);
         add(saveButton);
+        add(helpButton);
     }
 
 
@@ -123,6 +148,7 @@ public class PanelMenubar extends JPanel {
 
                     if(Integer.parseInt(strings[0]) == 1) {
                         box = new BoxAttributes();
+                        Data d = Data.getInstance();
                         box.isBox = Integer.parseInt(strings[0]);
                         box.name = strings[1];
                         box.rectangle = new Rectangle(Integer.parseInt(strings[2]),
@@ -132,9 +158,13 @@ public class PanelMenubar extends JPanel {
                         box.status[0] = strings[0];
                         box.status[1] = strings[1];
                         boxes.add(box);
+                        d.addClass(strings[1]);
+                        box.loadCode();
+                        
                     }
                     else if(Integer.parseInt(strings[0]) == 0) {
                         box = new BoxAttributes();
+                        Data d = Data.getInstance();
                         box.isBox = Integer.parseInt(strings[0]);
                         box.relationship = Integer.parseInt(strings[1]);
                         box.start = strings[2];
@@ -146,6 +176,10 @@ public class PanelMenubar extends JPanel {
                         box.status[0] = strings[0];
                         box.status[1] = strings[1];
                         boxes.add(box);
+                        int rel = Integer.parseInt(strings[1]);
+                        d.updateClass(strings[2], rel ,strings[3]);
+                        box.loadCode();
+                        
                     }
                 }
 

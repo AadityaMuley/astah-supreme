@@ -79,6 +79,8 @@ public class PanelDrawUml extends JPanel {
                                             startBoxName,
                                             endBoxName,
                                             new Line2D.Double(X1, Y1, X2, Y2));
+                                    statusBar.drawLabel();
+                                    statusBar.repaint();
 
                                     boxes.add(boxAttributes);
                                 }
@@ -147,13 +149,13 @@ public class PanelDrawUml extends JPanel {
                             i.rectangle.y = e.getY();
                         }
 
-                        if(i.isBox == 0 && movedBoxName == i.start) {
+                        if(i.isBox == 0 && movedBoxName.equals(i.start)) {
                             double newX1 = e.getX() + (width/2);
                             double newY1 = e.getY() + (height/2);
                             i.line = new Line2D.Double(newX1, newY1, i.line.getX2(), i.line.getY2());
                         }
 
-                        if(i.isBox == 0 && movedBoxName == i.end) {
+                        if(i.isBox == 0 && movedBoxName.equals(i.end)) {
                             double newX1 = e.getX() + (width/2);
                             double newY1 = e.getY() + (height/2);
                             i.line = new Line2D.Double(i.line.getX1(), i.line.getY1(), newX1, newY1);
@@ -247,6 +249,8 @@ public class PanelDrawUml extends JPanel {
                 boxAttributes.setBoxAttributes(1,
                         content,
                         new Rectangle(me.getX(), me.getY(), width, height));
+                statusBar.drawLabel();
+                statusBar.repaint();
                 
                 boxes.add(boxAttributes);
                 
@@ -274,10 +278,9 @@ public class PanelDrawUml extends JPanel {
 
     public void setBoxes(ArrayList<BoxAttributes> boxes) {
         this.boxes = boxes;
-        for(BoxAttributes box : boxes) {
-            System.out.println(box);
-        }
         repaint();
+        
+
     }
 
 }
