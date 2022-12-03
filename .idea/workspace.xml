@@ -7,8 +7,9 @@
     <list default="true" id="21c28d70-3da6-4969-bc2f-9ffa505c358e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BoxAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BoxAttributes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/PanelDrawUml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PanelDrawUml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PanelStatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PanelStatusBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PanelSourceCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PanelSourceCode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

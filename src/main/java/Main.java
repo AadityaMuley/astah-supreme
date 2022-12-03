@@ -1,10 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
 
 /**
  * Title: Assignment 4
@@ -53,7 +49,6 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-<<<<<<< HEAD
 
 
 
@@ -91,8 +86,6 @@ public class Main extends JFrame {
         //ass2.add("Teacher");
         
         //panelSourceCode.printCode();
-=======
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
     }
     
     public static void main(String[] args) {

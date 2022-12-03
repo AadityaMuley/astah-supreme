@@ -1,10 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-<<<<<<< HEAD
+
 import java.util.Observable;
 import java.util.Observer;
-=======
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
+
 
 /**
  * Title: Assignment 4
@@ -15,9 +14,8 @@ import java.util.Observer;
  * ASU ID : 1225526185
  * @version 1.0
  */
-<<<<<<< HEAD
-public class PanelSourceCode extends JPanel implements Observer{
-
+public class PanelSourceCode extends JPanel implements Observer {
+    
     JTextArea code = new JTextArea();
     
     PanelSourceCode() {
@@ -29,10 +27,10 @@ public class PanelSourceCode extends JPanel implements Observer{
         code.setText(" ");
         this.add(code);
         //this.add(scrollPane);
-        
-
+    
+    
     }
-
+    
     // public void printCode(){
     //     //JLabel code = new JLabel();
     //     CodeGeneration c = new CodeGeneration();
@@ -41,27 +39,16 @@ public class PanelSourceCode extends JPanel implements Observer{
     //     String generatedCode = c.getCode();
     //     System.out.println(generatedCode);
     //     code.setText(generatedCode);
-
+    
     //     this.add(code);
     // }
-
+    
     @Override
     public void update(Observable o, Object arg1) {
         // TODO Auto-generated method stub
-        String generatedCode = ((CodeGeneration)o).getCode();
+        String generatedCode = ((CodeGeneration) o).getCode();
         //printCode();
         code.setText(generatedCode);
         System.out.println("Update Called");
-        
-=======
-public class PanelSourceCode extends JPanel {
-    
-    PanelSourceCode() {
-        JPanel codePanel = new JPanel();
-        JScrollPane scrollPane = new JScrollPane(codePanel);
-
-        this.setLayout(new GridLayout());
-        this.add(scrollPane);
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
     }
 }

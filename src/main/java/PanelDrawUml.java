@@ -43,11 +43,6 @@ public class PanelDrawUml extends JPanel {
                 // draw rectangle box with class name on Left click
                 if(SwingUtilities.isLeftMouseButton(e)) {
                     boolean drawNewRect = true;
-<<<<<<< HEAD
-                    
-=======
-    
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
                     // check if mouse clicked inside an existing box twice to create a relationship line
                     for(int i=0; i<boxes.size(); i++) {
                         if(boxes.get(i).isBox == 1) {
@@ -86,10 +81,6 @@ public class PanelDrawUml extends JPanel {
                                             new Line2D.Double(X1, Y1, X2, Y2));
 
                                     boxes.add(boxAttributes);
-<<<<<<< HEAD
-                                    
-=======
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
                                 }
                             }
                         }
