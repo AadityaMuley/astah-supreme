@@ -27,13 +27,34 @@ public class PanelMenubar extends JPanel {
     PanelDrawUml drawUml = new PanelDrawUml();
     JButton loadButton;
     JButton saveButton;
+    JButton newButton;
+    JButton helpButton;
     private ArrayList<BoxAttributes> boxes = new ArrayList<>();
 
 
     PanelMenubar() {
 
+        newButton = new JButton("New");
         loadButton = new JButton("Load");
         saveButton = new JButton("Save");
+        helpButton = new JButton("Help");
+
+
+        ActionListener helpListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new help();
+            }
+        };
+
+
+        ActionListener newListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boxes.clear();
+                drawUml.setBoxes(boxes);
+            }
+        };
 
 
         ActionListener saveListener = new ActionListener() {
@@ -77,10 +98,14 @@ public class PanelMenubar extends JPanel {
             }
         };
 
+        newButton.addActionListener(newListener);
         loadButton.addActionListener(loadListener);
         saveButton.addActionListener(saveListener);
+        helpButton.addActionListener(helpListener);
+        add(newButton);
         add(loadButton);
         add(saveButton);
+        add(helpButton);
     }
 
 
