@@ -17,7 +17,7 @@ public class PanelDrawUml extends JPanel {
     
     PanelStatusBar statusBar = new PanelStatusBar();
 
-    private ArrayList<BoxAttributes> boxes = new ArrayList<BoxAttributes>();
+    public static ArrayList<BoxAttributes> boxes = new ArrayList<BoxAttributes>();
     
     private final int width = 100;
     private final int height = 50;
@@ -97,6 +97,7 @@ public class PanelDrawUml extends JPanel {
                 if(SwingUtilities.isRightMouseButton(e)) {
                     relationSelector.setRelation();
                 }
+
             }
 
             @Override
@@ -164,6 +165,7 @@ public class PanelDrawUml extends JPanel {
             }
 
         });
+
     }
 
 
@@ -214,7 +216,7 @@ public class PanelDrawUml extends JPanel {
                 }
             }
         }
-        
+
         repaint();
     }
     
@@ -262,4 +264,20 @@ public class PanelDrawUml extends JPanel {
         dialog.pack();
         dialog.setVisible(true);
     }
+
+
+    public ArrayList<BoxAttributes> getBoxes() {
+        return this.boxes;
+    }
+
+
+
+    public void setBoxes(ArrayList<BoxAttributes> boxes) {
+        this.boxes = boxes;
+        for(BoxAttributes box : boxes) {
+            System.out.println(box);
+        }
+        repaint();
+    }
+
 }
