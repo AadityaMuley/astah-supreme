@@ -14,30 +14,22 @@ import java.util.Observer;
  */
 public class PanelStatusBar extends JPanel implements Observer {
     
-    JLabel label;
+    private static JLabel label;
     private static String[] status = new String[2];
     private String l;
 
     PanelStatusBar() {
-//        label.setText("Application started - Welcome!!!");
-//        add(label);
         label = new JLabel("Application started - Welcome!!!");
         add(label);
     }
 
-    private void drawLabel(String l) {
+    public void drawLabel() {
         System.out.println(l);
-        //removeAll();
         
-        label.setText(l);
-        add(label);
-        //add(label);
+        JLabel status = new JLabel(l);
+        add(status);
         
-        //repaint();
-        removeAll();
-
-        label = new JLabel(l);
-        add(label);
+        repaint();
     }
 
 
@@ -47,20 +39,16 @@ public class PanelStatusBar extends JPanel implements Observer {
 
         if(status[0].equalsIgnoreCase("1")) {
             l = "New class named - " + status[1] + " - created";
-            drawLabel(l);
         }
         else {
             if(status[1].equalsIgnoreCase("1")) {
                 l = "New Association relation created";
-                drawLabel(l);
             }
             else if(status[1].equalsIgnoreCase("2")) {
                 l = "New Aggregation relation created";
-                drawLabel(l);
             }
             else {
                 l = "New Inheritance relation created";
-                drawLabel(l);
             }
         }
     }
