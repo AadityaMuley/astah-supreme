@@ -12,20 +12,6 @@ public class BoxAttributes extends Observable {
     public String end;
     public Line2D line;
     public String[] status = new String[2];
-
-//    public BoxAttributes(int isBox, String name, Rectangle rectangle) {
-//        this.isBox = isBox;
-//        this.name = name;
-//        this.rectangle = rectangle;
-//    }
-//
-//    public BoxAttributes(int isBox, int relationship, String start, String end, Line2D line) {
-//        this.isBox = isBox;
-//        this.relationship = relationship;
-//        this.start = start;
-//        this.end = end;
-//        this.line = line;
-//    }
     
     public void setBoxAttributes(int isBox, String name, Rectangle rectangle) {
         this.isBox = isBox;
@@ -41,10 +27,6 @@ public class BoxAttributes extends Observable {
         d.addObserver(cg);
 
         d.addClass(name);
-        
-        setChanged();
-        notifyObservers();
-        
         
         setChanged();
         notifyObservers();
@@ -67,7 +49,6 @@ public class BoxAttributes extends Observable {
         d.addObserver(cg);
 
         d.updateClass(start, relationship, end);
-
 
         setChanged();
         notifyObservers();

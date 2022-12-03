@@ -14,23 +14,24 @@ import java.util.Observer;
  */
 public class PanelStatusBar extends JPanel implements Observer {
     
-    JLabel label;
+    JLabel label = new JLabel();
     private static String[] status = new String[2];
     private String l;
     
     PanelStatusBar() {
-        JLabel label = new JLabel("Application started - Welcome!!!");
-        add(label);
+//        label.setText("Application started - Welcome!!!");
+//        add(label);
     }
     
     private void drawLabel(String l) {
         System.out.println(l);
-        removeAll();
+        //removeAll();
         
-        label = new JLabel(l);
+        label.setText(l);
         add(label);
+        //add(label);
         
-        repaint();
+        //repaint();
     }
     
     @Override

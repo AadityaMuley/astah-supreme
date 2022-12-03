@@ -19,36 +19,17 @@ public class PanelSourceCode extends JPanel implements Observer {
     JTextArea code = new JTextArea();
     
     PanelSourceCode() {
-        JPanel codePanel = new JPanel();
-        //JScrollPane scrollPane = new JScrollPane(codePanel);
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
         this.setLayout(new GridLayout());
         code.setText(" ");
         this.add(code);
-        //this.add(scrollPane);
-    
-    
     }
-    
-    // public void printCode(){
-    //     //JLabel code = new JLabel();
-    //     CodeGeneration c = new CodeGeneration();
-    //     //c.update(c);
-    //     System.out.println("Print Code called");
-    //     String generatedCode = c.getCode();
-    //     System.out.println(generatedCode);
-    //     code.setText(generatedCode);
-    
-    //     this.add(code);
-    // }
     
     @Override
     public void update(Observable o, Object arg1) {
         // TODO Auto-generated method stub
         String generatedCode = ((CodeGeneration) o).getCode();
-        //printCode();
         code.setText(generatedCode);
-        System.out.println("Update Called");
     }
 }
