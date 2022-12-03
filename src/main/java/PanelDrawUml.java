@@ -79,8 +79,6 @@ public class PanelDrawUml extends JPanel {
                                             startBoxName,
                                             endBoxName,
                                             new Line2D.Double(X1, Y1, X2, Y2));
-                                    statusBar.drawLabel();
-                                    statusBar.repaint();
 
                                     boxes.add(boxAttributes);
                                 }
@@ -249,8 +247,6 @@ public class PanelDrawUml extends JPanel {
                 boxAttributes.setBoxAttributes(1,
                         content,
                         new Rectangle(me.getX(), me.getY(), width, height));
-                statusBar.drawLabel();
-                statusBar.repaint();
                 
                 boxes.add(boxAttributes);
                 

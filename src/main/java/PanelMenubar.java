@@ -3,14 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
-import java.beans.EventHandler;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -25,6 +21,8 @@ import java.util.Scanner;
 public class PanelMenubar extends JPanel {
 
     PanelDrawUml drawUml = new PanelDrawUml();
+    
+    Data data = Data.getInstance();
     JButton loadButton;
     JButton saveButton;
     JButton newButton;
@@ -53,6 +51,9 @@ public class PanelMenubar extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 boxes.clear();
                 drawUml.setBoxes(boxes);
+    
+                LinkedList<DataStructure> classStructures = new LinkedList<>();
+                data.newClass(classStructures);
             }
         };
 
@@ -91,6 +92,12 @@ public class PanelMenubar extends JPanel {
         ActionListener loadListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+    
+                boxes.clear();
+                drawUml.setBoxes(boxes);
+    
+                LinkedList<DataStructure> classStructures = new LinkedList<>();
+                data.newClass(classStructures);
 
                 loadFile();
                 drawUml.setBoxes(boxes);
@@ -120,7 +127,6 @@ public class PanelMenubar extends JPanel {
         int retrival = fileChooser1.showSaveDialog(null);
         if(retrival == JFileChooser.APPROVE_OPTION) {
             try {
-                System.out.println(result);     /////////////////////////////////////////////
                 FileWriter fw = new FileWriter(fileChooser1.getSelectedFile() + ".txt");
                 fw.write(result);
                 fw.close();

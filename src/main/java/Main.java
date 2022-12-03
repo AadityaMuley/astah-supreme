@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 /**
  * Title: Assignment 4
@@ -51,7 +50,6 @@ public class Main extends JFrame {
         setVisible(true);
         
         Data d = Data.getInstance();
-        //Data d2 = Data.getInstance();
         CodeGeneration cg = new CodeGeneration();
         cg.addObserver(panelSourceCode);
         d.addObserver(cg);

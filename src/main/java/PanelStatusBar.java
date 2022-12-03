@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,15 +21,6 @@ public class PanelStatusBar extends JPanel implements Observer {
     PanelStatusBar() {
         label = new JLabel("Application started - Welcome!!!");
         add(label);
-    }
-
-    public void drawLabel() {
-        System.out.println(l);
-        
-        JLabel status = new JLabel(l);
-        add(status);
-        
-        repaint();
     }
 
 
