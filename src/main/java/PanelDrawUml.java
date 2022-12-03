@@ -278,6 +278,8 @@ public class PanelDrawUml extends JPanel {
             System.out.println(box);
         }
         repaint();
+        
+
     }
 
 }

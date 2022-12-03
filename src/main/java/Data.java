@@ -24,17 +24,22 @@ public class Data extends Observable {
     }
 
     public void updateClass(String classname, int relationship, String end){
-
+        //System.out.println("Function being Loaded: " + classname);
+        //System.out.println(relationship);
         for(DataStructure c : classStructures){
-            if( c.classname == classname){
+            if( c.classname.equals(classname)){
+                //System.out.println("Classname being called " + classname);
+                //System.out.println("Classname in the Data " + c.classname);
                 if(relationship == 3){
+                    System.out.println("inheritance");
                     c.inheritance = end;
                 }
                 else if(relationship == 2){
-
+                    System.out.println("Aggregation");
                     c.aggregation.add(end);
                 }
                 else{
+                    System.out.println("Association");
                     c.association.add(end);
                 }
             }
