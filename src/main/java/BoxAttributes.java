@@ -53,6 +53,13 @@ public class BoxAttributes extends Observable {
         setChanged();
         notifyObservers();
     }
+
+    public void loadCode(){
+        setChanged();
+        notifyObservers();
+
+
+    }
     
     public String[] getStatus() {
         return(status);
