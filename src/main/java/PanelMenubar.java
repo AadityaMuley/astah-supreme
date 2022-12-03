@@ -125,10 +125,10 @@ public class PanelMenubar extends JPanel {
                         box = new BoxAttributes();
                         box.isBox = Integer.parseInt(strings[0]);
                         box.name = strings[1];
-                        box.rectangle.x = Integer.parseInt(strings[2]);
-                        box.rectangle.y = Integer.parseInt(strings[3]);
-                        box.rectangle.width = Integer.parseInt(strings[4]);
-                        box.rectangle.height = Integer.parseInt(strings[5]);
+                        box.rectangle = new Rectangle(Integer.parseInt(strings[2]),
+                                                      Integer.parseInt(strings[3]),
+                                                      Integer.parseInt(strings[4]),
+                                                      Integer.parseInt(strings[5]));
                         box.status[0] = strings[0];
                         box.status[1] = strings[1];
                         boxes.add(box);

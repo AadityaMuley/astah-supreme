@@ -270,8 +270,13 @@ public class PanelDrawUml extends JPanel {
         return this.boxes;
     }
 
+
+
     public void setBoxes(ArrayList<BoxAttributes> boxes) {
         this.boxes = boxes;
+        for(BoxAttributes box : boxes) {
+            System.out.println(box);
+        }
         repaint();
     }
 
