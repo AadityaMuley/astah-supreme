@@ -17,6 +17,7 @@ public class PanelStatusBar extends JPanel implements Observer {
     private static JLabel label;
     private static String[] status = new String[2];
     private String l;
+    Status s;
 
     PanelStatusBar() {
         label = new JLabel("Application started - Welcome!!!");
@@ -39,16 +40,20 @@ public class PanelStatusBar extends JPanel implements Observer {
 
         if(status[0].equalsIgnoreCase("1")) {
             l = "New class named - " + status[1] + " - created";
+            s = new Status(l);
         }
         else {
             if(status[1].equalsIgnoreCase("1")) {
                 l = "New Association relation created";
+                s = new Status(l);
             }
             else if(status[1].equalsIgnoreCase("2")) {
                 l = "New Aggregation relation created";
+                s = new Status(l);
             }
             else {
                 l = "New Inheritance relation created";
+                s = new Status(l);
             }
         }
     }
