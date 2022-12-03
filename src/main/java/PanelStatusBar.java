@@ -13,30 +13,29 @@ import java.util.Observer;
  * @version 1.0
  */
 public class PanelStatusBar extends JPanel implements Observer {
-    
+
     JLabel label;
     private static String[] status = new String[2];
     private String l;
-    
+
     PanelStatusBar() {
-        JLabel label = new JLabel("Application started - Welcome!!!");
+        label = new JLabel("Application started - Welcome!!!");
         add(label);
     }
-    
+
     private void drawLabel(String l) {
         System.out.println(l);
         removeAll();
-        
+
         label = new JLabel(l);
         add(label);
-        
-        repaint();
     }
-    
+
+
     @Override
     public void update(Observable o, Object arg) {
         status = ((BoxAttributes)o).getStatus();
-        
+
         if(status[0].equalsIgnoreCase("1")) {
             l = "New class named - " + status[1] + " - created";
             drawLabel(l);
@@ -56,4 +55,5 @@ public class PanelStatusBar extends JPanel implements Observer {
             }
         }
     }
+
 }
