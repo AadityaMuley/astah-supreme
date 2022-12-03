@@ -17,7 +17,7 @@ public class PanelDrawUml extends JPanel {
     
     PanelStatusBar statusBar = new PanelStatusBar();
 
-    public static ArrayList<BoxAttributes> boxes = new ArrayList<BoxAttributes>();
+    private ArrayList<BoxAttributes> boxes = new ArrayList<BoxAttributes>();
     
     private final int width = 100;
     private final int height = 50;
@@ -43,6 +43,7 @@ public class PanelDrawUml extends JPanel {
                 // draw rectangle box with class name on Left click
                 if(SwingUtilities.isLeftMouseButton(e)) {
                     boolean drawNewRect = true;
+                    
                     // check if mouse clicked inside an existing box twice to create a relationship line
                     for(int i=0; i<boxes.size(); i++) {
                         if(boxes.get(i).isBox == 1) {
@@ -81,6 +82,7 @@ public class PanelDrawUml extends JPanel {
                                             new Line2D.Double(X1, Y1, X2, Y2));
 
                                     boxes.add(boxAttributes);
+                                    
                                 }
                             }
                         }
@@ -97,7 +99,6 @@ public class PanelDrawUml extends JPanel {
                 if(SwingUtilities.isRightMouseButton(e)) {
                     relationSelector.setRelation();
                 }
-
             }
 
             @Override
@@ -165,7 +166,6 @@ public class PanelDrawUml extends JPanel {
             }
 
         });
-
     }
 
 
@@ -216,7 +216,7 @@ public class PanelDrawUml extends JPanel {
                 }
             }
         }
-
+        
         repaint();
     }
     
@@ -264,15 +264,4 @@ public class PanelDrawUml extends JPanel {
         dialog.pack();
         dialog.setVisible(true);
     }
-
-
-    public ArrayList<BoxAttributes> getBoxes() {
-        return this.boxes;
-    }
-
-    public void setBoxes(ArrayList<BoxAttributes> boxes) {
-        this.boxes = boxes;
-        repaint();
-    }
-
 }
