@@ -33,24 +33,9 @@ public class BoxAttributes extends Observable {
         this.rectangle = rectangle;
         status[0] = String.valueOf(isBox);
         status[1] = name;
-<<<<<<< HEAD
-
-        PanelSourceCode panelSourceCode = new PanelSourceCode();
-        Data d = Data.getInstance();
-        CodeGeneration cg = new CodeGeneration();
-        cg.addObserver(panelSourceCode);
-        d.addObserver(cg);
-
-        d.addClass(name);
         
         setChanged();
         notifyObservers();
-
-=======
-        
-        setChanged();
-        notifyObservers();
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
     }
     
     public void setLineAttributes(int isBox, int relationship, String start, String end, Line2D line) {
@@ -61,19 +46,7 @@ public class BoxAttributes extends Observable {
         this.line = line;
         status[0] = String.valueOf(isBox);
         status[1] = String.valueOf(relationship);
-<<<<<<< HEAD
-
-        PanelSourceCode panelSourceCode = new PanelSourceCode();
-        Data d = Data.getInstance();
-        CodeGeneration cg = new CodeGeneration();
-        cg.addObserver(panelSourceCode);
-        d.addObserver(cg);
-
-        d.updateClass(start, relationship, end);
-
-=======
         
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
         setChanged();
         notifyObservers();
     }

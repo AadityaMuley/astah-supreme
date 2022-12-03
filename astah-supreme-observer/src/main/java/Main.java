@@ -1,10 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
 
 /**
  * Title: Assignment 4
@@ -53,13 +50,6 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-<<<<<<< HEAD
-
-
-
-
-
-
 
         //Trail
         Data d = Data.getInstance();
@@ -67,32 +57,26 @@ public class Main extends JFrame {
         CodeGeneration cg = new CodeGeneration();
         cg.addObserver(panelSourceCode);
         d.addObserver(cg);
-        // String classnametest, classinherit;
-        // ArrayList<String> ass = new ArrayList<String>();
-        // ArrayList<String> agg = new ArrayList<String>();
-        // ArrayList<String> ass2 = new ArrayList<String>();
-        // ArrayList<String> agg2 = new ArrayList<String>();
+        String classnametest, classinherit;
+        ArrayList<String> ass = new ArrayList<String>();
+        ArrayList<String> agg = new ArrayList<String>();
+        ArrayList<String> ass2 = new ArrayList<String>();
+        ArrayList<String> agg2 = new ArrayList<String>();
 
-        // classnametest  = "Jash";
-        // classinherit = "Person";
-        // ass.add("Student");
-        // agg.add("Homework");
-        // d.addClass(classnametest , classinherit, agg, ass);
+        classnametest  = "Jash";
+        classinherit = "Person";
+        ass.add("Student");
+        agg.add("Homework");
+        d.addClass(classnametest , classinherit, agg, ass);
 
-        // classnametest  = "Javier";
-        // classinherit = "Person";
-        // ass2.add("Teacher");
-        // agg2.add("Test");
-        // d2.addClass(classnametest , classinherit, agg2, ass2);
-        // //d2.addClass(classnametest , null, agg, null);
-        // //classinherit = "Person";
-        // agg2.add("Test2");
-        //d2.updateClass(classnametest , null, agg2, null);
-        //ass2.add("Teacher");
+        classnametest  = "Javier";
+        classinherit = "Person";
+        ass2.add("Teacher");
+        agg2.add("Test");
+        d2.addClass(classnametest , classinherit, agg2, ass2);
+        //d2.addClass(classnametest , null, agg, null);
         
         //panelSourceCode.printCode();
-=======
->>>>>>> ad5fd042fa546b79e960ea8707e0f8104bbdeae2
     }
     
     public static void main(String[] args) {
